@@ -20,7 +20,8 @@ class ContactsTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = moveButton
        // moveButton.title = "Done"
         
-        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ContactsTableViewController.addContact))
+        navigationItem.rightBarButtonItem = addButton
         
         let jenny = Contact(name: nil, phoneNumber: "808-769-2532")
         let richard = Contact(name: "Richard Smith", phoneNumber: "808-966-64116")
@@ -30,6 +31,7 @@ class ContactsTableViewController: UITableViewController {
         self.contacts.append(richard)
         self.contacts.append(lee)
 
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -40,6 +42,13 @@ class ContactsTableViewController: UITableViewController {
     @objc func toggleEdit() {
         tableView.setEditing(!tableView.isEditing, animated: true)
         
+    }
+    
+    @objc func addContact() {
+        let newContact = Contact(name: "New Contact", phoneNumber: "New PhoneNumber")
+        self.contacts.append(newContact)
+        let newIndexPath = IndexPath(row: self.contacts.count - 1, section: 0)
+        self.tableView.insertRows(at: [newIndexPath], with: .automatic)
     }
 
     override func didReceiveMemoryWarning() {
@@ -129,16 +138,19 @@ class ContactsTableViewController: UITableViewController {
     override func tableView( _ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
-   
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
-    /*
+   
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
+    //}
+
 
 }
