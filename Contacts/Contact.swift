@@ -9,8 +9,10 @@
 import UIKit
 
 class Contact: NSObject {
-    var name = String?.init(nilLiteral: ())
-    var phoneNumber = String?.init(nilLiteral: ())
+  //  var name = String?.init(nilLiteral: ())
+  //  var phoneNumber = String?.init(nilLiteral: ())
+    var name : String?
+    var phoneNumber : String?
     
     init(name: String?, phoneNumber: String?) {
         self.name = name

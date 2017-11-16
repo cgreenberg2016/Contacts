@@ -22,6 +22,8 @@ class ContactsTableViewController: UITableViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ContactsTableViewController.addContact))
         navigationItem.rightBarButtonItem = addButton
         
+        
+        
         let jenny = Contact(name: nil, phoneNumber: "808-769-2532")
         let richard = Contact(name: "Richard Smith", phoneNumber: "808-966-64116")
         let lee = Contact(name: "Lee Petrale", phoneNumber: nil)
@@ -41,12 +43,17 @@ class ContactsTableViewController: UITableViewController {
     @objc func toggleEdit() {
         tableView.setEditing(!tableView.isEditing, animated: true)
 // this changes the text like I want, but then it breaks the button action
-        let doneButton = UIBarButtonItem()
-        doneButton.title = "Done"
+   //    let doneButton = UIBarButtonItem()
+    //    doneButton.title = "Done"
+    //    navigationItem.leftBarButtonItem = doneButton
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(ContactsTableViewController.doneEdit))
         navigationItem.leftBarButtonItem = doneButton
-
-        
-        
+    }
+    @objc func doneEdit() {
+        tableView.setEditing(false, animated: true)
+        let moveButton = UIBarButtonItem(barButtonSystemItem: .edit,  target: self, action: #selector(ContactsTableViewController.toggleEdit))
+        navigationItem.leftBarButtonItem = moveButton
     }
     
     @objc func addContact() {
